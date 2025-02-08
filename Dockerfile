@@ -22,45 +22,6 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 
 
-# docker-compose.yml
-version: '3.8'
-
-services:
-  web:
-    build: .
-    ports:
-      - "8000:8000"
-    environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/payments
-      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
-      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
-      - API_KEY=${API_KEY}
-    depends_on:
-      - db
-    volumes:
-      - ./payment_service:/app
-    networks:
-      - payment-network
-
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=payments
-    ports:
-      - "5432:5432"
-    networks:
-      - payment-network
-
-volumes:
-  postgres_data:
-
-networks:
-  payment-network:
-    driver: bridge
 
 # .env
 STRIPE_SECRET_KEY=your_stripe_secret_key
