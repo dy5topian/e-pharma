@@ -20,14 +20,7 @@ ENV PYTHONUNBUFFERED=1
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
-# requirements.txt
-fastapi==0.68.1
-uvicorn==0.15.0
-sqlalchemy==1.4.23
-psycopg2-binary==2.9.1
-stripe==2.60.0
-pydantic==1.8.2
-python-dotenv==0.19.0
+
 
 # docker-compose.yml
 version: '3.8'
